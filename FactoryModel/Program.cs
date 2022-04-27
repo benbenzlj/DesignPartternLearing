@@ -5,6 +5,13 @@ namespace DesignPatterns.FactoryMethod.Conceptual
     {
         public abstract IProduct FactoryMethod();
 
+        public string SomeOperation()
+        {
+            var product = FactoryMethod();
+            var result = "Creator: The same creator's code has just wored with " + product.Operation();
+            return result;
+        }
+
     }
 
     class ConcreteCreator1 : Creator
@@ -32,7 +39,7 @@ namespace DesignPatterns.FactoryMethod.Conceptual
     {
         public string Operation()
         {
-            return "{Result of ConcreteProduct1";
+            return "{ Result of ConcreteProduct1 }";
         }
     }
 
@@ -40,7 +47,7 @@ namespace DesignPatterns.FactoryMethod.Conceptual
     {
         public string Operation()
         {
-            return "{Result  of ConcreteProduct2}";
+            return "{ Result  of ConcreteProduct2 }";
         }
     }
 
@@ -49,7 +56,28 @@ namespace DesignPatterns.FactoryMethod.Conceptual
         public void Main()
         {
             Console.WriteLine("App: Launched with the ConcreteCreator1.");
+            ClientCode(new ConcreteCreator1());
+            
+            Console.WriteLine("");
+            
+            Console.WriteLine("App: Launched with the ConcreteCreator2.");
+            ClientCode(new ConcreteCreator2());
 
+        }
+
+        public void ClientCode(Creator creator)
+        {
+
+            Console.WriteLine("Client: I'm not aware of the creator's class,but it will works.\n" + creator.SomeOperation());
+
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            new Client().Main();
         }
     }
 
